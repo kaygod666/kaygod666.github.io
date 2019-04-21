@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>6.8.2</title>
+
+</head>
+<script type="text/javascript"> 
+    var sun = new Image();
+    var moon = new Image();
+    var earth = new Image();
+    function init(){
+      sun.src = 'images/sun.png';
+      moon.src = 'images/moon.png';
+      earth.src = 'images/earth.png';
+      setInterval(draw,100);
+    }
+   function draw()
+    {
+     var ctx = document.getElementById('canvasId').getContext('2d');
+
+  ctx.clearRect(0,0,300,300); 
+  ctx.fillStyle = 'rgba(0,0,0)';
+  ctx.fillRect(0,0,300,300);
+  ctx.drawImage(sun,125,125,50,50);
+  ctx.strokeStyle = 'rgba(0,153,255,0.4)';
+  ctx.beginPath();
+  ctx.arc(150,150,100,0,Math.PI*2,false); 
+  ctx.stroke();
+  ctx.closePath();
+  ctx.save();
+  ctx.translate(150,150);  
+  var time = new Date();   
+  ctx.rotate(((2*Math.PI)/60)*time.getSeconds() + ((2*Math.PI)/60000)*time.getMilliseconds());
+  ctx.translate(105,0);    
+  ctx.drawImage(earth,-12,-12);  
+  ctx.save();  
+  ctx.rotate( ((2*Math.PI)/6)*time.getSeconds() +
+                          ((2*Math.PI)/6000)*time.getMilliseconds() );
+  ctx.translate(0,28.5);
+  ctx.drawImage(moon,-3.5,-3.5);
+
+  ctx.restore();
+  ctx.restore();
+
+  }
+window.addEventListener("load", init, true);
+</script>
+
+</script>
+<body>
+<canvas id="canvasId" width="300" height="300"<canvas>
+</body>
+</html>
